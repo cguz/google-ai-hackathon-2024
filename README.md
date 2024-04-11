@@ -13,6 +13,7 @@ Install Google Cloud AI platform
 
 ```
 $ pip install google-cloud-aiplatform
+$ pip install google-cloud-texttospeech 
 ```
 
 Export the credential
