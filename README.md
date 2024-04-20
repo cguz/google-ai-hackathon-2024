@@ -1,4 +1,4 @@
-# Germony
+# Garmony Muse
 
 ## Installation
 
