@@ -39,12 +39,11 @@ const create = async (req, res) => {
     } */
     const { prompt } = req.body;
     try {
-        console.log("Create...");
         const result = await GeminiModel.run({ prompt });
         
         console.log(result);
         
-        const [result_insert_db] = await LyricModel.insert({ result });
+        const [result_insert_db] = await LyricModel.insert( result );
 
         res.json(result);
     } catch (error) {
