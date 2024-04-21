@@ -1,4 +1,5 @@
 const LyricModel = require('../models/lyric.model');
+const GeminiModel = require('../models/gemini.model');
 
 // Retrieve all the lyrics
 const getAll = async (req, res) => {
@@ -36,11 +37,16 @@ const create = async (req, res) => {
             required: true,
             schema: { $ref: "#/definitions/lyric" }
     } */
-    const { message, boolean_teacher, userId, teacherId } = req.body;
+    const { prompt } = req.body;
     try {
-        const [result] = await LyricModel.insert({ message, boolean_teacher, userId, teacherId });
-        const [lyric] = await LyricModel.selectById(result.insertId);
-        res.json(lyric[0]);
+        console.log("Create...");
+        const result = await GeminiModel.run({ prompt });
+        
+        console.log(result);
+        
+        const [result_insert_db] = await LyricModel.insert({ result });
+
+        res.json(result);
     } catch (error) {
         res.json({ error: error.message });
     }
