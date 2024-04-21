@@ -7,9 +7,15 @@
 
 ## Development Environment
 
-Install npm
+Install npm 
 
 ```Bash
  $ sudo apt install npm
+```
+
+Install require express
+
+```Bash
+ $ npm install
 ```
 

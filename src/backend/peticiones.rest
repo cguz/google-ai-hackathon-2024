@@ -1,0 +1,32 @@
+########
+### API ####
+#########
+
+######## Lyric
+### Request for a lyric
+POST http://localhost:3000/api/v1/garmony/lyric
+Content-Type: application/json
+
+{
+    "prompt": "Banana title", 
+}
+
+### Retrieve all lyrics
+GET http://localhost:3000/api/v1/garmony/lyric
+
+### Retrieve one lyric
+GET http://localhost:3000/api/v1/garmony/lyric/5
+
+### Update a lyric
+PUT http://localhost:3000/api/v1/garmony/lyric/5
+Content-Type: application/json
+
+{
+    
+    "title": "title", 
+    "lyric": "change lyric", 
+    "cover": "image"
+}
+
+###
+DELETE http://localhost:3000/api/v1/garmony/lyric/5
