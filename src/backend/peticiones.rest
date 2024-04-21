@@ -4,7 +4,7 @@
 
 ######## Lyric
 ### Request for a lyric
-POST http://localhost:3000/api/v1/garmony/lyric
+POST http://localhost:3000/api/v1/garmony/
 Content-Type: application/json
 
 {
@@ -12,13 +12,13 @@ Content-Type: application/json
 }
 
 ### Retrieve all lyrics
-GET http://localhost:3000/api/v1/garmony/lyric
+GET http://localhost:3000/api/v1/garmony/
 
 ### Retrieve one lyric
-GET http://localhost:3000/api/v1/garmony/lyric/1
+GET http://localhost:3000/api/v1/garmony/1
 
 ### Update a lyric
-PUT http://localhost:3000/api/v1/garmony/lyric/1
+PUT http://localhost:3000/api/v1/garmony/1
 Content-Type: application/json
 
 {
@@ -29,4 +29,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/api/v1/garmony/lyric/2
+DELETE http://localhost:3000/api/v1/garmony/2
