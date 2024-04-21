@@ -1,21 +1,21 @@
 const express = require('express');
 const cors = require('cors');
 
-// [Swagger] libreria swagger para generar API documentation
+// [Swagger] Library for generating API documentation
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
-// Creación de instancia de express app
+// Create an instance of express app
 const app = express();
 
-// Configuración express app
-app.use(cors()); // Integración de CORS middleware
-app.use(express.json()); // Parsear requests en formato JSON
+// Configure express app
+app.use(cors()); // Integrate CORS middleware
+app.use(express.json()); // Parse requests in JSON format
 
-// Ruta
+// Route
 app.use('/api', require('./routes/api'));
 
-// [Swagger] documentacion de la API
+// [Swagger] API documentation
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 module.exports = app;

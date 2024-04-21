@@ -1,24 +1,24 @@
-// Carga de protocolo http
+// Load http protocol
 const http = require('http');
 
-// Carga de aplicación de express
+// Load express application
 const app = require('./src/app');
 
-// Carga de variables de entorno
+// Load environment variables
 require('dotenv').config();
 
-// Configuracion de bbdd
-require('./src/config/db');
+// Database configuration
+require('./src/config/db-mysql');
 
-// Creación del servidor
+// Create server
 const server = http.createServer(app);
 
-// Definición del puerto
+// Define port
 const PORT = process.env.PORT || 3000;
 
-// Arranque del servidor
+// Start server
 server.listen(PORT);
 
-// Handler de eventos del servidor
+// Server event handlers
 server.on('listening', () => console.log(`Server running on port: ${PORT}`));
 server.on('error', (error) => console.log(error));
