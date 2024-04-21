@@ -10,8 +10,8 @@ const insert = ({ message, boolean_teacher, userId, teacherId }) => {
     return db.query('INSERT INTO lyrics (message, boolean_teacher, user_id, teacher_id) VALUES (?, ?, ?, ?)', [message, boolean_teacher, userId, teacherId]);
 };
 
-const update = (id, { message }) => {
-    return db.query('UPDATE lyrics SET message = ? WHERE id = ?', [message, id]);
+const update = (id, { title, lyric, cover, speech }) => {
+    return db.query('UPDATE lyrics SET title = ?, lyric =?, cover =?, speech=? WHERE id = ?', [title, lyric, cover, speech, id]);
 };
 
 const deleteById = (id) => {

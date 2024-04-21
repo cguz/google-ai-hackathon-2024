@@ -19,7 +19,7 @@ const getLyric = async (req, res) => {
     const { id } = req.params;
     try {
         const [lyric] = await LyricModel.selectById(id);
-        res.json(chat[0]);
+        res.json(lyric[0]);
     } catch (error) {
         res.json({ error: error.message });
     }
@@ -40,7 +40,7 @@ const create = async (req, res) => {
     try {
         const [result] = await LyricModel.insert({ message, boolean_teacher, userId, teacherId });
         const [lyric] = await LyricModel.selectById(result.insertId);
-        res.json(chat[0]);
+        res.json(lyric[0]);
     } catch (error) {
         res.json({ error: error.message });
     }
@@ -57,11 +57,11 @@ const update = async (req, res) => {
             schema: { $ref: "#/definitions/lyric" }
     } */
     const { id } = req.params;
-    const { message } = req.body;
+    const { title, lyric, cover, speech } = req.body;
     try {
-        const [result] = await LyricModel.update(id, message);
-        const [lyric] = await LyricModel.selectById(id);
-        res.json(chat[0]);
+        const [result] = await LyricModel.update(id, {title, lyric, cover, speech});
+        const [lyric_r] = await LyricModel.selectById(id);
+        res.json(lyric_r[0]);
     } catch (error) {
         res.json({ error: error.message });
     }
