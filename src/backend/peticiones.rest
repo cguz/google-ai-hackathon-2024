@@ -8,7 +8,7 @@ POST http://localhost:3000/api/v1/garmony/
 Content-Type: application/json
 
 {
-    "prompt": "Banana title"
+    "prompt": "Banana is my favourite fruit, minions like it very much"
 }
 
 ### Retrieve all lyrics
