@@ -2,7 +2,7 @@ const run = async ({prompt}) => {
     // async function because getTitle,getLyric are async functions ...
     let title = await getTitle(prompt);
     let lyric = await getLyric(prompt);
-    let cover =  getCover(prompt);
+    let cover =  await getCover(prompt);
     let speech = getSpeech(prompt);
 
     let result = {
@@ -61,7 +61,6 @@ async function generateContent(prompt) {
   const streamingResp = await generativeModel.generateContentStream(req);
     const responses = []
     for await (const item of streamingResp.stream) {
-      // process.stdout.write('stream chunk: ' + JSON.stringify(item) + '\n');
       responses.push(item.candidates[0].content.parts[0].text)
     }
     return responses
@@ -85,12 +84,32 @@ const getLyric = async (prompt) => {
     return finalString
 };
 
-const getCover = (prompt) => {
-    return "code to generate cover";
+const getCover = async (prompt) => {
+  const { PythonShell } = require('python-shell');
+
+  // Set the options for PythonShell
+  let options = {
+    mode: 'text',
+    pythonPath: 'python3', // Change this to your Python interpreter path if necessary
+    pythonOptions: ['-u'], // unbuffered stdout and stderr
+    scriptPath: '/home/google-hackathon/google-ai-hackathon-2024/src/backend/'
+  };
+  
+  let stringToPass = 'generate a cover image for following prompt' + prompt;
+  // Call the Python function
+  
+  PythonShell.run('gen_image.py', { ...options, args: [stringToPass] }, function (err, result) {
+    if (err) {
+      console.error('Error:', err);
+      throw err;
+    }
+    console.log('Python function returned:', result); 
+  });
+    return "Success!";
 };
 
 const getSpeech = () => {
-    return "cove to generate speech";
+    return "code to generate speech";
 };
 
 module.exports = {
