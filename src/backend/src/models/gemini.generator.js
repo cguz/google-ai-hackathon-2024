@@ -17,27 +17,32 @@ const getLyric = async (prompt) => {
 
 const getCover = async (prompt) => {
 
-  return new Promise((resolve, reject) => {
-      let options = {
-          mode: 'text',
-          pythonPath: 'python3', // Change this to your Python interpreter path if necessary
-          pythonOptions: ['-u'], // unbuffered stdout and stderr
-          scriptPath: './scripts' // Update the path to the directory containing the Python script
-      };
+  // Generate unique filenames with the current date and time
+  const timestamp = new Date().toISOString().replace(/[-T:.]/g, '');
+  const filename1 = `./media/images/gi_${timestamp}.jpg`;
+  const filename2 = `./media/images/gi_${timestamp}.jpg`;
 
-      let stringToPass = 'generate a cover image for following prompt ' + prompt;
+  let stringToPass = 'generate a cover image for following prompt ' + prompt;
 
-      PythonShell.run('gen_image.py', { ...options, args: [stringToPass] }, function (err, result) {
-          if (err) {
-              console.error('Error:', err);
-              reject(err);
-          } else {
-              console.log('Python function returned:', result);
-              resolve(result); // Resolve with the result returned by the Python script
-          }
-      });
+  let options = {
+    mode: 'json',
+    pythonPath: 'python3', // Change this to your Python interpreter path if necessary
+    pythonOptions: ['-u'], // unbuffered stdout and stderr
+    scriptPath: './scripts', // Update the path to the directory containing the Python script
+    args: [stringToPass, filename1, filename2]
+  };
+
+  PythonShell.run('gen_image.py', { ...options }, function (err, result) {
+    if (err) {
+      console.error('Error:', err);
+      throw err;
+    } else {
+      console.log('Python function returned:', result.toString());
+    }
   });
-  
+
+  return filename1;
+
 };
 
 const getSpeech = () => {

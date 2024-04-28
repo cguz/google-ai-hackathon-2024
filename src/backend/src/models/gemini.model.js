@@ -6,9 +6,10 @@ const run = async ({ prompt }) => {
     
     // Use the promise returned by getCover
     let cover;
-    console.log("Hola !!!");
     try {
+        console.log("Hola !!!");
         cover = await getCover(prompt);
+        console.log("Hola !!!");
         console.log('Cover image result:', cover);
     } catch (error) {
         console.error('Error getting cover image:', error);
