@@ -14,7 +14,14 @@ const ResponseDisplay = ({ title, lyric, cover, speech }) => {
           image={cover}
         />
         <CardContent>
-          <Typography variant="body1">{lyric}</Typography>
+        <Typography variant="body1">
+          {lyric && lyric.split('\n').map((line, index) => (
+              <span key={index}>
+                {line}
+                <br />
+              </span>
+            ))}
+          </Typography>
         </CardContent>
       </Card>
       <audio controls>
