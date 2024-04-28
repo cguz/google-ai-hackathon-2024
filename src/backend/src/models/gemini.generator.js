@@ -1,4 +1,5 @@
 const { generateContent } = require('./gemini.vertexai');
+const { PythonShell } = require('python-shell');
 
 const getTitle = async (prompt) => {
     question = "Generate only one title for a song based on the following prompt \n" + prompt + "";
@@ -15,27 +16,28 @@ const getLyric = async (prompt) => {
 };
 
 const getCover = async (prompt) => {
-  const { PythonShell } = require('python-shell');
 
-  // Set the options for PythonShell
-  let options = {
-    mode: 'text',
-    pythonPath: 'python3', // Change this to your Python interpreter path if necessary
-    pythonOptions: ['-u'], // unbuffered stdout and stderr
-    scriptPath: './'
-  };
-  
-  let stringToPass = 'generate a cover image for following prompt' + prompt;
-  // Call the Python function
-  
-  PythonShell.run('./scripts/gen_image.py', { ...options, args: [stringToPass] }, function (err, result) {
-    if (err) {
-      console.error('Error:', err);
-      throw err;
-    }
-    console.log('Python function returned:', result); 
+  return new Promise((resolve, reject) => {
+      let options = {
+          mode: 'text',
+          pythonPath: 'python3', // Change this to your Python interpreter path if necessary
+          pythonOptions: ['-u'], // unbuffered stdout and stderr
+          scriptPath: './scripts' // Update the path to the directory containing the Python script
+      };
+
+      let stringToPass = 'generate a cover image for following prompt ' + prompt;
+
+      PythonShell.run('gen_image.py', { ...options, args: [stringToPass] }, function (err, result) {
+          if (err) {
+              console.error('Error:', err);
+              reject(err);
+          } else {
+              console.log('Python function returned:', result);
+              resolve(result); // Resolve with the result returned by the Python script
+          }
+      });
   });
-    return "Success!";
+  
 };
 
 const getSpeech = () => {

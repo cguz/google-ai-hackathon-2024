@@ -3,7 +3,19 @@ const { getTitle, getLyric, getCover, getSpeech } = require('./gemini.generator'
 const run = async ({ prompt }) => {
     let title = await getTitle(prompt);
     let lyric = await getLyric(prompt);
-    let cover = await getCover(prompt);
+    
+    // Use the promise returned by getCover
+    let cover;
+    console.log("Hola !!!");
+    try {
+        cover = await getCover(prompt);
+        console.log('Cover image result:', cover);
+    } catch (error) {
+        console.error('Error getting cover image:', error);
+        // Handle the error appropriately, such as setting a default value for cover
+        cover = 'Default cover image';
+    }
+
     let speech = getSpeech(prompt);
 
     let result = {
