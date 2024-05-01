@@ -1,16 +1,27 @@
 const { VertexAI } = require('@google-cloud/vertexai');
 
+require('dotenv').config();
+
+// Read project ID and location from environment variables
+const project = process.env.VAI_PROJECT;
+const location = process.env.VAI_LOCATION;
+
+// Check if required environment variables are set
+if (!project || !location) {
+  throw new Error('VAI_PROJECT and VAI_LOCATION environment variables are required');
+}
+
 // Initialize Vertex with your Cloud project and location
-const vertex_ai = new VertexAI({ project: 'powerful-genre-419511', location: 'us-central1' });
-const model = 'gemini-1.0-pro-002';
+const vertex_ai = new VertexAI({ project, location });
+const model = process.env.VAI_MODEL;
 
 // Instantiate the models
 const generativeModel = vertex_ai.preview.getGenerativeModel({
     model: model,
     generationConfig: {
-        'maxOutputTokens': 2048,
-        'temperature': 1,
-        'topP': 1,
+        'maxOutputTokens': process.env.VAI_MAXOUTPUTTOKENS,
+        'temperature': process.env.VAI_TEMPERATURE,
+        'topP': process.env.VAI_TOPP,
     },
     safetySettings: [
         {

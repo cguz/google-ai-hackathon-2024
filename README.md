@@ -2,16 +2,10 @@
 
 ## Installation
 
-Python environment
-
-```
-$ python3 -m venv .env
-$ source .env/bin/activate
-```
 
 Install Google Cloud AI platform
 
-```
+```Bash
 $ pip install google-cloud-aiplatform
 $ pip install google-cloud-texttospeech 
 ```
