@@ -1,0 +1,32 @@
+########
+### API ####
+#########
+
+######## Lyric
+### Request for a lyric
+POST http://localhost:3000/api/v1/garmony/
+Content-Type: application/json
+
+{
+    "prompt": "Banana is my favourite fruit, minions like it very much"
+}
+
+### Retrieve all lyrics
+GET http://localhost:3000/api/v1/garmony/
+
+### Retrieve one lyric
+GET http://localhost:3000/api/v1/garmony/1
+
+### Update a lyric
+PUT http://localhost:3000/api/v1/garmony/1
+Content-Type: application/json
+
+{
+  "title": "tile",
+  "lyric": "change lyric",
+  "cover": "cover",
+  "speech": "speech"
+}
+
+###
+DELETE http://localhost:3000/api/v1/garmony/2

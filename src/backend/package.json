@@ -1,0 +1,33 @@
+{
+  "name": "garmony-muse-backend",
+  "version": "1.0.0",
+  "description": "### Creadores:",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev1": "node --watch index.js",
+    "dev": "nodemon index.js",
+    "swagger": "node ./src/swagger.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/vertexai": "^1.1.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.10",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
+    "mysql2": "^3.6.3",
+    "nodemailer": "^6.9.7",
+    "python-shell": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.0"
+  }
+}
