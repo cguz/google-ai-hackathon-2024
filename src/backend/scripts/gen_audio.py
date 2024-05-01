@@ -40,9 +40,10 @@ if __name__ == "__main__":
     
     lyrics =  sys.argv[1]
     output = sys.argv[2]
-
-    if not os.path.exists('media/audio'):
-        os.makedirs('media/audio')
+    # output = output.split('/')[0:-1].join('/')
+    output_dir = os.path.dirname(os.path.abspath(output))
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
 
     # Synthesize text to MP3 file
     synthesize_text_to_file(lyrics, output)

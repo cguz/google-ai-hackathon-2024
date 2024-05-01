@@ -35,7 +35,7 @@ if __name__ == "__main__":
     filename1 = sys.argv[2]
     filename2 = sys.argv[3]
 
-    if not os.path.exists('./media/images'):
-        os.makedirs('./media/images')
-
+    output_dir = os.path.dirname(os.path.abspath(filename1))
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
     create_image(prompt, filename1, filename2)
