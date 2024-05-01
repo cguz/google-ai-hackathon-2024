@@ -14,6 +14,7 @@ router.post('/', GarmonyController.create);
 router.put('/:id', GarmonyController.update);
 
 //DELETE
+router.delete('/all', GarmonyController.deleteAll);
 router.delete('/:id', GarmonyController.deleteById);
 
 module.exports = router;

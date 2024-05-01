@@ -33,3 +33,6 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/api/v1/garmony/7
+
+###
+DELETE http://localhost:3000/api/v1/garmony/all

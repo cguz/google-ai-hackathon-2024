@@ -4,18 +4,13 @@ import { Typography, Card, CardContent, CardMedia } from '@material-ui/core';
 
 const ResponseDisplay = ({ title, lyric, cover, speech }) => {
   return (
-    <div>
+    <div className="response-container"> 
       <Typography variant="h4">{title}</Typography>
-      <Card style={{ maxWidth: 500 }}>
-        <CardMedia
-          component="img"
-          alt="Cover"
-          height="auto"
-          image={cover}
-        />
-        <CardContent>
-        <Typography variant="body1">
-          {lyric && lyric.split('\n').map((line, index) => (
+      <br />
+      <Card style={{ display: 'flex', boxShadow: 'none'}}> {/* Set flexbox display */}
+        <CardContent style={{ flex: 1 }}> {/* Allow CardContent to grow */}
+          <Typography variant="body1" style={{ fontFamily: 'Segoe UI', fontSize:1.25+'rem'}}>
+            {lyric && lyric.split('\n').map((line, index) => (
               <span key={index}>
                 {line}
                 <br />
@@ -23,8 +18,15 @@ const ResponseDisplay = ({ title, lyric, cover, speech }) => {
             ))}
           </Typography>
         </CardContent>
+        <CardMedia
+          component="img"
+          alt="Cover"
+          height="auto"
+          image={cover}
+          style={{ width: 500 }}
+        />
       </Card>
-      <br></br>
+      <br />
       <audio controls>
         <source src={speech} type="audio/mpeg" />
         Your browser does not support the audio element.

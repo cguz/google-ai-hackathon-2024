@@ -40,8 +40,8 @@ if __name__ == "__main__":
     
     lyrics =  sys.argv[1]
     output = sys.argv[2]
-    # output = output.split('/')[0:-1].join('/')
     output_dir = os.path.dirname(os.path.abspath(output))
+    
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
