@@ -11,3 +11,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.lyric-container {
+  display: flex; /* Enable two columns */
+}
+
+.lyric-titles {
+  width: 20%; /* Define width for the left section */
+  padding: 10px;
+  border-right: 1px solid #ddd; /* Add a border to separate columns */
+  height: calc(100vh - 80px); /* Set height for scrolling area */
+  overflow-y: auto; /* Enable vertical scrollbar if content overflows */
+}
+
+.main-content {
+  flex: 1; /* Make the right section fill remaining space */
+  padding: 10px;
+}
+
+.bottom-container {
+  position: absolute;
+  bottom: 0;
+  width: -webkit-fill-available;
+  padding-bottom: 36px;
+}

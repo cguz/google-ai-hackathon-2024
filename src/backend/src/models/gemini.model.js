@@ -2,6 +2,10 @@ const { getTitle, getLyric, getCover, getSpeech } = require('./gemini.generator'
 
 const run = async ({ prompt }) => {
     let title = await getTitle(prompt);
+    
+    // Remove "#" characters from the title
+    title = title.replace(/^#+/, ''); 
+
     let lyric = await getLyric(prompt);
     
     // Use the promise returned by getCover

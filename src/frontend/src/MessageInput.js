@@ -21,13 +21,13 @@ const MessageInput = ({ onSendPrompt }) => {
     <form onSubmit={handleSubmit}>
       <TextField
         variant="outlined"
-        placeholder="Type a prompt..."
+        placeholder="Which lyric would you like to generate?..."
         fullWidth
         value={inputText}
         onChange={handleChange}
-      />
-      <Button variant="contained" color="primary" type="submit">
-        Send Prompt
+      />      
+      <Button variant="contained" color="primary" style={{ marginTop:10 + 'px' }} type="submit">
+        Generate
       </Button>
     </form>
   );
