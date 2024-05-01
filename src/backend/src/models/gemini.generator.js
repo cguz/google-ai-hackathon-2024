@@ -2,14 +2,14 @@ const { generateContent } = require('./gemini.vertexai');
 const { PythonShell } = require('python-shell');
 
 const getTitle = async (prompt) => {
-    question = "Generate only one title for a song based on the following prompt \n" + prompt + "";
+    question = `${process.env.VAI_PROMPT_TITLE}` + prompt + "";
     const response = await generateContent(question);
     const finalString = response.join(' ');
     return finalString;
 };
 
 const getLyric = async (prompt) => {
-    question = "Generate one song lyrics with two Verses and one chorus for the following prompt \n" + prompt + "";
+    question = `${process.env.VAI_PROMPT_LYRIC}` + prompt + "";
     const response = await generateContent(question);
     const finalString = response.join(' ');
     return finalString;
@@ -19,10 +19,10 @@ const getCover = async (prompt) => {
 
   // Generate unique filenames with the current date and time
   const timestamp = new Date().toISOString().replace(/[-T:.]/g, '');
-  const filename1 = `./media/images/gi_${timestamp}.jpg`;
-  const filename2 = `./media/images/gi_${timestamp}.jpg`;
+  const filename1 = `${process.env.VAI_PATH_BACK_COVER}gi_${timestamp}.jpg`;
+  const filename2 = `${process.env.VAI_PATH_BACK_COVER}gi_${timestamp}.jpg`;
 
-  let stringToPass = 'generate a cover image for following prompt ' + prompt;
+  let stringToPass = `${process.env.VAI_PROMPT_COVER}` + prompt;
 
   let options = {
     mode: 'json',
@@ -41,12 +41,16 @@ const getCover = async (prompt) => {
     }
   });
 
-  return filename1;
+  return `${process.env.VAI_PATH_FRONT_COVER}gi_${timestamp}.jpg`;
 
 };
 
 const getSpeech = () => {
-    return "code to generate speech";
+  //process.env.VAI_PROMPT_SPEECH;
+  //process.env.VAI_PATH_BACK_MP3;
+  //process.env.VAI_PATH_FRONT_MP3;
+
+  return "code to generate speech";
 };
 
 module.exports = { getTitle, getLyric, getCover, getSpeech };
