@@ -26,8 +26,8 @@ const Chat = () => {
       <Typography variant="h4" gutterBottom>
         Garmony Muse - Lyrics generator
       </Typography>
-      <MessageInput onSendPrompt={sendPrompt} />
       {response && <ResponseDisplay {...response} />}
+      <MessageInput onSendPrompt={sendPrompt} />
     </Container>
   );
 }

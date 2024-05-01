@@ -14,8 +14,11 @@ Content-Type: application/json
 ### Retrieve all lyrics
 GET http://localhost:3000/api/v1/garmony/
 
+### Retrieve all titles
+GET http://localhost:3000/api/v1/garmony/titles/
+
 ### Retrieve one lyric
-GET http://localhost:3000/api/v1/garmony/1
+GET http://localhost:3000/api/v1/garmony/13
 
 ### Update a lyric
 PUT http://localhost:3000/api/v1/garmony/1
@@ -29,4 +32,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/api/v1/garmony/2
+DELETE http://localhost:3000/api/v1/garmony/7
