@@ -6,6 +6,9 @@ const selectById = (id) => {
     return db.query('SELECT * FROM lyrics WHERE id = ?', [id]);
 };
 
+const selectTitles = () => {
+    return db.query('SELECT title FROM lyrics')
+}
 const insert = ({ title, lyric, cover, speech }) => {
     return db.query('INSERT INTO lyrics (title, lyric, cover, speech, session) VALUES (?, ?, ?, ?, ?)', [title, lyric, cover, speech, "session"]);
 };
@@ -24,4 +27,5 @@ module.exports = {
     insert: insert,
     update: update,
     deleteById: deleteById,
+    selectTitles: selectTitles,
 };

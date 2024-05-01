@@ -26,6 +26,18 @@ const getLyric = async (req, res) => {
     }
 };
 
+// Retrieve all Titles
+const getTitles = async (req, res) => {
+    console.log('calling get titles');
+    try {
+        const [titles] = await LyricModel.selectTitles();
+        console.log(titles);
+        res.json(titles);
+    } catch (error) {
+        res.json({ error: error.message });
+    }
+};
+
 // Create a lyric
 const create = async (req, res) => {
     
@@ -104,4 +116,5 @@ module.exports = {
     create: create,
     update: update,
     deleteById: deleteById,
+    getTitles: getTitles,
 };
