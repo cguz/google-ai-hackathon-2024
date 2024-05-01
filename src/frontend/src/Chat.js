@@ -9,6 +9,7 @@ const Chat = () => {
   const [response, setResponse] = useState(null);
 
   const sendPrompt = (prompt) => {
+    console.log("sending ... ");
     axios.post('http://localhost:3000/api/v1/garmony/', { prompt })
       .then(response => {
         console.log('Response:', response.data);
@@ -23,7 +24,7 @@ const Chat = () => {
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
-        Chat App
+        Garmony Muse - Lyrics generator
       </Typography>
       <MessageInput onSendPrompt={sendPrompt} />
       {response && <ResponseDisplay {...response} />}

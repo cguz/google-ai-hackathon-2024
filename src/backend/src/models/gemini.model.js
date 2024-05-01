@@ -5,16 +5,7 @@ const run = async ({ prompt }) => {
     let lyric = await getLyric(prompt);
     
     // Use the promise returned by getCover
-    let cover;
-    try {
-        cover = await getCover(prompt);
-        console.log('Cover image result:', cover);
-    } catch (error) {
-        console.error('Error getting cover image:', error);
-        // Handle the error appropriately, such as setting a default value for cover
-        cover = 'Default cover image';
-    }
-
+    let cover = await getCover(prompt);
     let speech = await getSpeech(lyric);
 
     let result = {

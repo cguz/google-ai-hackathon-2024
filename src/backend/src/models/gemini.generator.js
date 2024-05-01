@@ -32,40 +32,45 @@ const getCover = async (prompt) => {
     args: [stringToPass, filename1, filename2]
   };
 
-  PythonShell.run('gen_image.py', { ...options }, function (err, result) {
-    if (err) {
-      console.error('Error:', err);
-      throw err;
+  try{
+    const result = await PythonShell.run('gen_image.py', options);
+    if (result.err) {
+      console.error('Error:', result.err);
+      throw result.err;
     } else {
-      console.log('Python function returned:', result.toString());
+      console.log('Python function getCover return:', result.toString());
+      return `${process.env.VAI_PATH_FRONT_COVER}gi_${timestamp}.jpg`;
     }
-  });
-
-  return `${process.env.VAI_PATH_FRONT_COVER}gi_${timestamp}.jpg`;
-
+  } catch(error){
+    console.error('Error generating cover:', error);
+    return `${process.env.VAI_PATH_FRONT_COVER}gi_error.jpg`;
+  }
 };
 
 const getSpeech = async (lyrics) => {
-    const timestamp = new Date().toISOString().replace(/[-T:.]/g, '');
-    const filename = `${process.env.VAI_PATH_BACK_MP3}ga_${timestamp}.mp3`;
-    let options = {
-      mode: 'json',
-      pythonPath: 'python3', // Change this to your Python interpreter path if necessary
-      pythonOptions: ['-u'], // unbuffered stdout and stderr
-      scriptPath: './scripts', // Update the path to the directory containing the Python script
-      args: [lyrics, filename]
-    };
+  const timestamp = new Date().toISOString().replace(/[-T:.]/g, '');
+  const filename = `${process.env.VAI_PATH_BACK_MP3}ga_${timestamp}.mp3`;
+  let options = {
+    mode: 'json',
+    pythonPath: 'python3', // Change this to your Python interpreter path if necessary
+    pythonOptions: ['-u'], // unbuffered stdout and stderr
+    scriptPath: './scripts', // Update the path to the directory containing the Python script
+    args: [lyrics, filename]
+  };
 
-    PythonShell.run('txt2speech.py', { ...options }, function (err, result) {
-      if (err) {
-        console.error('Error:', err);
-        throw err;
-      } else {
-        console.log('Python function returned:', result.toString());
-        return "Failed";
-      }
-    });
-    return `${process.env.VAI_PATH_FRONT_MP3}ga_${timestamp}.mp3`;
+  try {
+    const result = await PythonShell.run('gen_audio.py', options);
+    if (result.err) {
+      console.error('Error:', result.err);
+      throw result.err;
+    } else {
+      console.log('Python function getSpeech return:', result.toString());
+      return `${process.env.VAI_PATH_FRONT_MP3}ga_${timestamp}.mp3`;
+    }
+  }catch (error) {
+    console.error('Error generating speech:', error);
+    return `${process.env.VAI_PATH_FRONT_MP3}ga_error.mp3`;
+  }
 };
 
 module.exports = { getTitle, getLyric, getCover, getSpeech };

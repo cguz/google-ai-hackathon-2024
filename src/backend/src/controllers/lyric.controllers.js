@@ -43,6 +43,19 @@ const create = async (req, res) => {
         
         console.log(result);
         
+        function waitTwoSeconds() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                resolve(); // Signal that the wait is complete
+                }, 2000); // Wait for 2 seconds (2000 milliseconds)
+            });
+        }
+        
+        (async () => {
+            await waitTwoSeconds();
+            console.log("Waited for 2 seconds!");
+        })();
+        
         const [result_insert_db] = await LyricModel.insert( result );
 
         res.json(result);

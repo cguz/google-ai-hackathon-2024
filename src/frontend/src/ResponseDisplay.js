@@ -6,7 +6,7 @@ const ResponseDisplay = ({ title, lyric, cover, speech }) => {
   return (
     <div>
       <Typography variant="h4">{title}</Typography>
-      <Card style={{ maxWidth: 600 }}>
+      <Card style={{ maxWidth: 500 }}>
         <CardMedia
           component="img"
           alt="Cover"
@@ -24,6 +24,7 @@ const ResponseDisplay = ({ title, lyric, cover, speech }) => {
           </Typography>
         </CardContent>
       </Card>
+      <br></br>
       <audio controls>
         <source src={speech} type="audio/mpeg" />
         Your browser does not support the audio element.
