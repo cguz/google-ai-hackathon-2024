@@ -45,8 +45,27 @@ const getCover = async (prompt) => {
 
 };
 
-const getSpeech = () => {
-    return "code to generate speech";
+const getSpeech = async (lyrics) => {
+    const timestamp = new Date().toISOString().replace(/[-T:.]/g, '');
+    const filename = `./media/audio/ga_${timestamp}.mp3`;
+    let options = {
+      mode: 'json',
+      pythonPath: 'python3', // Change this to your Python interpreter path if necessary
+      pythonOptions: ['-u'], // unbuffered stdout and stderr
+      scriptPath: './scripts', // Update the path to the directory containing the Python script
+      args: [lyrics, filename]
+    };
+
+    PythonShell.run('txt2speech.py', { ...options }, function (err, result) {
+      if (err) {
+        console.error('Error:', err);
+        throw err;
+      } else {
+        console.log('Python function returned:', result.toString());
+        return "Failed";
+      }
+    });
+    return filename;
 };
 
 module.exports = { getTitle, getLyric, getCover, getSpeech };

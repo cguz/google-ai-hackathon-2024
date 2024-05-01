@@ -17,7 +17,7 @@ const run = async ({ prompt }) => {
         cover = 'Default cover image';
     }
 
-    let speech = getSpeech(prompt);
+    let speech = await getSpeech(lyric);
 
     let result = {
         title: title,
