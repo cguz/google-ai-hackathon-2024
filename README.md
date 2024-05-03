@@ -1,17 +1,7 @@
 # Garmony Muse
 
-## Installation
+Garmony is an interactive lyrics generator that utilizes Gemini AI to produce original song content.
+
+It allow users to input certain parameters like mood, genre, keywords or even just a single word, and Garmony will craft personalized song lyrics complete with a title and suggested cover art. Additionally, it can even read the final result.
 
 
-Install Google Cloud AI platform
-
-```Bash
-$ pip install google-cloud-aiplatform
-$ pip install google-cloud-texttospeech 
-```
-
-Export the credential
-
-```
-export GOOGLE_APPLICATION_CREDENTIALS="./config/keyfile.json"
-```
