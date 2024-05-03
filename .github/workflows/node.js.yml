@@ -1,29 +1,54 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+# This workflow defines a build and publish process for frontend and backend code
 
-name: Node.js CI
+name: Build and Publish
 
 on:
   push:
-    branches: [ "deploy" ]
-  pull_request:
-    branches: [ "deploy" ]
+    branches: [ deploy ]  # Trigger on pushes to the deploy branch
+  pull_request:  # Trigger on pull requests
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x, 16.x, 18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    runs-on: ubuntu-latest  # Run on Ubuntu virtual machines
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-presentx
+      - uses: actions/checkout@v3  # Checkout code from repository
+
+      # Build Frontend (React)
+      - name: Use Node.js 18.19.0
+        uses: actions/setup-node@v3
+        with:
+          node-version: 118.19.0  # Adjust if needed for your project
+
+      # General 
+      - name: Create folders
+        run: mkdir final_build
+
+      # Build Frontend (React)
+      - name: Install dependencies (frontend)
+        working-directory: src/frontend/  # Change directory for frontend build
+        run: npm install  # Install frontend dependencies
+
+      - name: Build frontend
+        working-directory: src/frontend/
+        run: npm run build  # Run build command for frontend (replace with yours)
+
+      - name: Move frontend build artifacts
+        run: mv build ../../final_build/frontend  # Move build folder to root as "frontend"
+
+      # Build Backend (Node.js Express)
+      - name: Install dependencies (backend)
+        working-directory: src/backend/  # Change directory for backend build
+        run: npm install  # Install backend dependencies
+
+      - name: Build backend  # Replace with your build command if needed
+        working-directory: src/backend/
+        run: npm run build  # Run build command for backend (replace with yours)
+
+      - name: Move backend build artifacts
+        run: mv build ../../final_build/backend  # Move build folder to root as "backend"
+
+      # Moving final dir
+      - name: Moving final dir
+      - run: rm -rf src/
+      - run: mv final_build/* .
